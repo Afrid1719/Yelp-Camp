@@ -1,0 +1,15 @@
+<%- include('./layouts/header') %>
+
+<div class="container">
+    <h2><%= campground.name %></h2>
+    <p class="description">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus eligendi est sunt nulla adipisci sequi doloremque libero ipsum recusandae quisquam consequuntur molestias obcaecati, reiciendis cupiditate et omnis ipsam quae quasi.</p>
+    <div class="row">
+        <div class="col-md-6 col-lg-4 col-xl-3">
+            <div class="img-thumbnail">
+                <img src="<%= campground.image %>" class="img-fluid">
+            </div>
+        </div>
+    </div>
+</div>
+
+<%-include('./layouts/footer')%>

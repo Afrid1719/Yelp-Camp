@@ -1,0 +1,21 @@
+<%- include('./layouts/header') %>
+
+<link rel="stylesheet" href="/css/campForm.css">
+
+<div class="container mt-5 p-5">
+    <form action="/campgrounds" method="post">
+        <div class="form-group">
+            <label for="name">Campground Name</label>
+            <input type="text" class="form-control" id="name" name="name"> 
+        </div>
+
+        <div class="form-group">
+            <label for="image">Campground Image URL</label>
+            <input type="url" class="form-control" id="image" name="image"> 
+        </div>
+
+        <button type="submit" class="btn btn-success">Add</button>
+    </form>
+</div>
+
+<%-include('./layouts/footer')%>

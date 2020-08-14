@@ -1,0 +1,92 @@
+*{
+    box-sizing: border-box;
+}
+.navbar{
+    background-color: #1c2331;
+}
+
+
+.navbar-dark .navbar-nav .nav-link,
+.navbar-dark .navbar-brand{
+    display: inline-block;
+    color: #e9ecef;
+    border-bottom: 1px solid;
+    border-top: 1px solid;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+    transition: 0.45s ease-in;
+}
+
+.navbar-dark .navbar-brand{
+    color: #28a745;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover{
+    color: #28a745;
+    border-bottom-color: #1e7b34;
+}
+
+.navbar-dark .navbar-nav .nav-link:active,
+.navbar-dark .navbar-nav .nav-link:focus{
+    color: #28a745;
+}
+
+.navbar-dark a.navbar-brand:hover{
+    color: #28a745;
+    border-bottom-color: #1e7b34;
+    border-top-color: #1e7b34;
+}
+
+.navbar-dark .navbar-nav .active > .nav-link{
+    color: #28a745;
+
+}
+.navbar-dark .navbar-nav .active > .nav-link:hover{
+    color: #28a745;
+    border-bottom-color: transparent;
+}
+
+.navbar-dark .navbar-toggler{
+    background-color: transparent;
+    border-color: #28a745;
+    color: #28a745;
+}
+
+input[type=search]{
+    background: transparent;
+    border-top: unset;
+    border-left: unset;
+    border-right: unset;
+    border-radius: unset;
+    color: #c1f0cc;
+}
+
+input[type=search]:focus{
+    box-shadow: unset;
+    border-color: unset;
+    background: #384561;
+    color: #fff;
+}
+
+.jumbotron h1{
+    color: #1c2331;
+}
+
+.btn.btn-success{
+    background-color: #28a745;
+}
+
+.btn.btn-success:hover,
+.btn.btn-success:focus {
+    background-color: #1e7b34;
+}
+
+.card-body{
+    background-color: #e9ecef;
+}
+
+@media screen and (min-width: 992px){
+    .nav-link{
+        display: block;
+    }
+}

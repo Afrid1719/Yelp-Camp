@@ -1,0 +1,23 @@
+<%- include('./layouts/header') %>
+
+<style>
+    .img-thumbnail{
+        border-color: #1e7b34;
+    }
+</style>
+
+<div class="container-fluid p-3">
+    <h2 class="text-center">The Gallery</h2>
+</div>
+
+<div class="container-fluid px-4 mt-2">
+    <div class="row justify-content-center">
+    <% images.forEach(function(data){ %>
+        <div class="col-md-4 col-lg-2">
+            <img src="<%= data.image %>" alt="<%= data.name %>" class="img-thumbnail img-fluid mb-2 mb-md-0 w-100">
+        </div>
+    <% }); %>
+    </div>
+</div>
+
+<%-include('./layouts/footer')%>

@@ -1,0 +1,25 @@
+<%- include('./layouts/header') %>
+
+<div class="container-md jumbotron">
+    <h1>Welcome to YelpCamp</h1>
+    <h6>Here you can find best campsites around the globe</h6>
+    <a href="/campgrounds/new" class="btn btn-success mt-4">Add New Campground</a>
+</div>
+
+<div class="container">
+    <div class="row pb-4">
+        <% data.forEach(function(camp){ %>
+        <div class="col-md-6 col-lg-4 mt-4">
+            <div class="card">
+                <img src="<%= camp.image %>" alt="" class="img-fluid card-img-top">
+                <div class="card-body">
+                    <h4 class="card-text"><%= camp.name %></h4>
+                    <a href="<%= `/campgrounds/${camp.id}` %>" class="card-link">Read More <span class="">&gt;</span></a>
+                </div>
+            </div>
+        </div>
+        <% }); %>
+    </div>
+</div>
+
+<%-include('./layouts/footer')%>
