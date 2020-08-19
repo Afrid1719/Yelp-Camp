@@ -1,8 +1,17 @@
-<%- include('./layouts/header') %>
+<%- include('./layouts/navbar') %>
 
-<div class="container">
-    <h2><%= campground.name %></h2>
-    <p class="description">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus eligendi est sunt nulla adipisci sequi doloremque libero ipsum recusandae quisquam consequuntur molestias obcaecati, reiciendis cupiditate et omnis ipsam quae quasi.</p>
+<link rel="stylesheet" href="/css/campground.css">
+<div class="container mt-3">
+    <div class="clearfix">
+        <h2 class="float-left"><%= campground.name %></h2>
+        <div class="float-right action-buttons">
+            <a href="<%= `/campgrounds/${campground._id}/edit` %>" class="btn btn-outline-success">Edit</a>
+            <form action="<%= `/campgrounds/${campground._id}?_method=DELETE` %>" method="post" class="d-inline">
+                <button class="btn btn-outline-danger" type="submit">Delete</button>
+            </form>
+        </div>
+    </div>
+    <p class="description"><%- campground.description %></p>
     <div class="row">
         <div class="col-md-6 col-lg-4 col-xl-3">
             <div class="img-thumbnail">

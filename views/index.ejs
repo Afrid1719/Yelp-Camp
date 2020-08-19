@@ -1,4 +1,4 @@
-<%- include('./layouts/header') %>
+<%- include('./layouts/navbar') %>
 
 <div class="container-md jumbotron">
     <h1>Welcome to YelpCamp</h1>
@@ -11,10 +11,10 @@
         <% data.forEach(function(camp){ %>
         <div class="col-md-6 col-lg-4 mt-4">
             <div class="card">
-                <img src="<%= camp.image %>" alt="" class="img-fluid card-img-top">
-                <div class="card-body">
+                <img src="<%= camp.image %>" alt="" class="img-fluid card-img-top" style="max-height: 260px">
+                <div class="card-body text-center">
                     <h4 class="card-text"><%= camp.name %></h4>
-                    <a href="<%= `/campgrounds/${camp.id}` %>" class="card-link">Read More <span class="">&gt;</span></a>
+                    <a href="<%= `/campgrounds/${camp.id}` %>" class="btn btn-primary">Read More</a>
                 </div>
             </div>
         </div>

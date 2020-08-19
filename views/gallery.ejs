@@ -1,23 +1,18 @@
-<%- include('./layouts/header') %>
+<%- include('./layouts/navbar') %>
 
-<style>
-    .img-thumbnail{
-        border-color: #1e7b34;
-    }
-</style>
+<link rel="stylesheet" href="/css/gallery.css">
 
 <div class="container-fluid p-3">
     <h2 class="text-center">The Gallery</h2>
 </div>
 
-<div class="container-fluid px-4 mt-2">
-    <div class="row justify-content-center">
+<div class="container-fluid gallery mb-3">
     <% images.forEach(function(data){ %>
-        <div class="col-md-4 col-lg-2">
-            <img src="<%= data.image %>" alt="<%= data.name %>" class="img-thumbnail img-fluid mb-2 mb-md-0 w-100">
-        </div>
+        <div class="img-container position-relative">
+            <img src="<%= data.image %>" alt="<%= data.name %>" class="pics w-100 h-auto">
+            <p class="camp-name text-center position-absolute font-weight-bold overflow-hidden"><a href="<%= `/campgrounds/${data.id}` %>"><%= data.name %></span></p>
+            </div>
     <% }); %>
-    </div>
 </div>
 
 <%-include('./layouts/footer')%>

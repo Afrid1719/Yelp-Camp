@@ -1,22 +1,21 @@
 <%- include('./layouts/navbar') %>
 
 <link rel="stylesheet" href="/css/campForm.css">
-
 <div class="container mt-5 p-5">
-    <form action="/campgrounds" method="post">
+    <form action="<%= `/campgrounds/${campground._id}?_method=PUT` %>" method="post">
         <div class="form-group">
             <label for="name">Campground Name</label>
-            <input type="text" class="form-control" id="name" name="camp[name]" required> 
+            <input type="text" class="form-control" id="name" name="camp[name]" value="<%= campground.name %>" required> 
         </div>
 
         <div class="form-group">
             <label for="image">Campground Image URL</label>
-            <input type="url" class="form-control" id="image" name="camp[image]" required> 
+            <input type="url" class="form-control" id="image" name="camp[image]" value="<%= campground.image %>" required> 
         </div>
 
         <div class="form-group">
             <label for="description">Description</label>
-            <textarea class="form-control" id="description" name="camp[description]" rows="3" required></textarea>
+            <textarea class="form-control" id="description" name="camp[description]" rows="3" required><%= campground.description %></textarea>
         </div>
 
         <button type="submit" class="btn btn-success">Add</button>
