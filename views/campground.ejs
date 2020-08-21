@@ -1,7 +1,7 @@
 <%- include('./layouts/navbar') %>
 
 <link rel="stylesheet" href="/css/campground.css">
-<div class="container mt-3">
+<div class="container my-3">
     <div class="clearfix">
         <h2 class="float-left"><%= campground.name %></h2>
         <div class="float-right action-buttons">
@@ -21,4 +21,22 @@
     </div>
 </div>
 
+<div class="container">
+    <form action="<%= `/campgrounds/${campground._id}/comments` %>" method="post">
+        <div class="form-row">
+            <div class="form-group col-md-8 col-12">
+                <textarea class="form-control" id="comment" name="comment" rows="2" cols="10" required></textarea>
+            </div>
+            <div class="col-md-4 col-4">
+                <button type="submit" class="btn btn-success">Comment</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="container comments">
+    <% campground.comments.forEach(comment){ %>
+        <p><%= comment.text %></p>    
+    <% } %>
+</div>
 <%-include('./layouts/footer')%>

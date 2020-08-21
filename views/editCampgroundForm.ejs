@@ -18,7 +18,9 @@
             <textarea class="form-control" id="description" name="camp[description]" rows="3" required><%= campground.description %></textarea>
         </div>
 
-        <button type="submit" class="btn btn-success">Add</button>
+        <button type="submit" class="btn btn-success">Update</button>
+
+    <a class="text-success d-block mt-2" href="<%= `/campgrounds/${campground._id}` %>">Go Back</a>
     </form>
 </div>
 
