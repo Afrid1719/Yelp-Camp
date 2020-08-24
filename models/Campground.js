@@ -4,7 +4,11 @@ var mongoose = require('mongoose');
 const campSchema = mongoose.Schema({
     name: {type: String, maxlength: 65},
     image: String,
-    description: {type: String, maxlength: 1500},
+    description: String,
+    author: {
+        id: mongoose.Schema.Types.ObjectId,
+        name: String 
+    },
     comments: [
         {
             type: mongoose.Schema.Types.ObjectId,

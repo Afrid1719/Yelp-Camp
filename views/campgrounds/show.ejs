@@ -1,69 +1,81 @@
 <%- include('../layouts/navbar') %>
 
 <link rel="stylesheet" href="/css/campground.css">
-<!-- <div class="container my-3">
-    <div class="clearfix">
-        <h2 class="float-left"><%= campground.name %></h2>
-        <div class="float-right action-buttons">
-            <a href="<%= `/campgrounds/${campground._id}/edit` %>" class="btn btn-outline-success">Edit</a>
-            <form action="<%= `/campgrounds/${campground._id}?_method=DELETE` %>" method="post" class="d-inline">
-                <button class="btn btn-outline-danger" type="submit">Delete</button>
-            </form>
-        </div>
-    </div>
-    <p class="description"><%- campground.description %></p>
-    <div class="row">
-        <div class="col-md-6 col-lg-4 col-xl-3">
-            <div class="img-thumbnail">
-                <img src="<%= campground.image %>" class="img-fluid">
-            </div>
-        </div>
-    </div>
-</div> -->
 
-<div class="container my-3">
+<div class="container my-4">
     <div class="row">
         <div class="col-md-3">
             <p class="lead">YelpCamp</p>
-            <div class="list-group">
+            <div class="list-group mb-sm-3">
                 <li class="list-group-item active">Info 1</li>
                 <li class="list-group-item">Info 2</li>
                 <li class="list-group-item">Info 3</li>
             </div>
         </div>
         <div class="col-md-9">
-            <div class="thumbnail">
-                <img src="<%= campground.image %>" alt="" class="img-fluid">
-                <div class="caption-full">
-                    <h4 class="pull-right">$9.00/night</h4>
-                    <h4><a href="#"><%= campground.name %></a></h4>
-                    <p><%- campground.description %></p>
+            <div class="card">
+                <img src="<%= campground.image %>" alt="" class="card-img-top img-fluid">
+                <div class="card-body bg-white">
+                    <div class="clearfix">
+                        <h4><a href="#" class="card-link float-left"><%= campground.name %></a></h4>
+                        <div class="card-title float-right font-weight-bold">$9.00/night</div>
+                    </div>
+                    <p>
+                        <%- campground.description %>
+                    <br>
+                    <em>- published by <em class="font-weight-bold text-capitalize"><%= campground.author.name %></em></em>
+                    </p>
+                    <% if(currentUser && campground.author.id.equals(currentUser._id)){ %>
+                    <a href="<%= `/campgrounds/${campground._id}/edit` %>" class="btn btn-outline-warning">Edit</a>
+                    <form action="<%= `/campgrounds/${campground._id}?_method=DELETE` %>" class="d-inline" method="POST">
+                        <button class="btn btn-outline-danger">Delete</button>
+                    </form>
+                    <% } %>
                 </div>
             </div>
+            <div class="jumbotron my-3 px-sm-4 py-sm-3">
+                <form action="<%= `/campgrounds/${campground._id}/comments` %>" method="post">
+                    <div class="form-row">
+                        <div class="form-group col-md-10 col-12">
+                            <textarea class="form-control" id="comment" name="comment" rows="2" cols="10" required></textarea>
+                        </div>
+                        <div class="col-md-2 col-12">
+                            <button type="submit" class="btn btn-success">Comment</button>
+                        </div>
+                    </div>
+                </form>
+                <hr>
+                <% if(campground.comments.length > 0){ %>
+                    <div class="container comments">
+                        <% campground.comments.forEach(function(comment){ %>
+                            <div class="comment-info clearfix">
+                                <div class="author float-left text-capitalize"><strong><%= comment.author.name %></strong></div>
+                                <div class="date badge badge-success float-right">10 days ago</div>
+                            </div>
+                            <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+                                <div class="authorized">
+                                    <form action="<%= `/campgrounds/${campground._id}/comments/${comment._id}?_method=PUT` %>" method="post" id="comment_form">
+                                        <input type="text" class="form-control" id="comment_body" name="comment_body" value="<%= comment.text %>" disabled aria-disabled="true">
+                                    </form>
+                                    <button class="btn btn-warning btn-sm" id="edit_comment">Edit</button>
+                                    <form action="<%= `/campgrounds/${campground._id}/comments/${comment._id}?_method=DELETE` %>" class="d-inline" method="POST">
+                                        <button class="btn btn-danger btn-sm" id="delete_comment">Delete</button>
+                                    </form>
+                                    <button class="btn btn-success btn-sm d-none" id="save_comment">Save</button>
+                                    <button class="btn btn-danger btn-sm d-none" id="cancel_comment">Cancel</button>
+                                </div>
+                            <% } else { %>
+                                <p><%= comment.text %></p>
+                            <% } %>
+                        <% }); %>
+                    </div>
+                <% } %>
+            </div>
         </div>
     </div>
 </div>
 
-<div class="container">
-    <form action="<%= `/campgrounds/${campground._id}/comments` %>" method="post">
-        <div class="form-row">
-            <div class="form-group col-md-8 col-12">
-                <textarea class="form-control" id="comment" name="comment" rows="2" cols="10" required></textarea>
-            </div>
-            <div class="col-md-4 col-4">
-                <button type="submit" class="btn btn-success">Comment</button>
-            </div>
-        </div>
-    </form>
-</div>
-
-<% if(campground.comments.length > 0){ %>
-    <div class="container comments">
-        <% campground.comments.forEach(function(comment){ %>
-            <p><%= comment.text %></p>
-        <% }); %>
-    </div>
-<% } %>
+<script src="/scripts/campground.js"></script>
 
 
 <%- include('../layouts/footer') %>

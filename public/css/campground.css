@@ -1,8 +1,24 @@
-.action-buttons{
-    line-height: 38px;
+.card-body{
+    padding: 0.6rem;
+}
+.author{
+    font-size: 18px;
 }
 
-.btn-outline-success{
-    color: #1e7b34;
-    border-color: #1e7b34;
+.authorized{
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+#comment_body:disabled{
+    background: transparent;
+    border: none;
+    color: #000;
+    padding: 0;
+    height: auto;
+    margin-bottom: 4px;
+}
+
+#comment_body:not(:disabled){
+    margin-bottom: 6px;
 }
