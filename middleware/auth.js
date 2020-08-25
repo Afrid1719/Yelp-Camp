@@ -1,7 +1,8 @@
 module.exports.isLoggedIn = function(req, res, next){
     if(req.isAuthenticated())
         return next();
-    res.redirect('/login');
+    req.flash('warning', 'You need to be logged in to do that.');
+    return res.redirect('/login');
 };
 
 module.exports.isAuthorized = function(resourceType){
@@ -15,12 +16,14 @@ module.exports.isAuthorized = function(resourceType){
         Model.findById(resourceId, function(err, resource){
             if(err){
                 console.log(err.message);
-                res.redirect('back');
+                req.flash('error', err.message);
+                return res.redirect('back');
             } else {
                 if(resource.author.id.equals(req.user._id))
                     return next();
                 // Will flash messages for not being authorized
-                res.redirect('back');
+                req.flash('warning', 'You are not permitted to do that');
+                return res.redirect('back');
             }
         });
     };    

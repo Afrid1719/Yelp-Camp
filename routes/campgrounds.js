@@ -9,6 +9,8 @@ router.get('/', (req, res) => {
     Campground.find({}, (err, campgrounds) => {
         if(err){
             console.log(err);
+            req.flash('error', err.message);
+            return res.redirect('/');
         } else {
             res.render('campgrounds/index', {data : campgrounds});
         }
@@ -28,9 +30,18 @@ router.post('/', isLoggedIn, (req, res) => {
             console.log(campground.name + ' added');
             campground.author.id = req.user._id;
             campground.author.name = req.user.username;
-            campground.save().then(campground => res.redirect('/')).catch(console.log);
+            campground.save().then(campground => {
+                req.flash('info', 'Campground published succesfully!!');
+                return res.redirect('/campgrounds');
+            }).catch(err => {
+                req.flash('error', err.message);
+                return res.redirect('/campgrounds');
+            });
         })
-        .catch(console.log);
+        .catch(err => {
+            req.flash('error', err.message);
+            return res.redirect('/campgrounds');
+        });
 });
 
 // Gallery
@@ -48,7 +59,9 @@ router.get('/gallery', (req, res) => {
 router.get('/:id', (req, res) => {
     Campground.findById(req.params.id).populate('comments').exec(function(err, campground){
         if(err){
+            req.flash('error', err.message);
             console.log(err);
+            return res.redirect('/campgrounds');
         } else {
             res.render('campgrounds/show', {campground: campground, currentUser: req.user});
         }
@@ -61,8 +74,11 @@ router.get('/:id/edit', isLoggedIn, isAuthorized('Campground'), (req, res) => {
     Campground.findById(req.params.id, function(err, foundCampground){
         if(err){
             console.log(err.message);
+            req.flash('error', err.message);
+            return res.redirect('back');
         } else {
-            res.render('campgrounds/edit', {campground: foundCampground});
+            req.flash('info', 'Campground updated successfully!!');
+            return res.render('campgrounds/edit', {campground: foundCampground});
         }
     });
 });
@@ -73,22 +89,27 @@ router.put('/:id', isLoggedIn, isAuthorized('Campground'), (req, res) => {
     Campground.findByIdAndUpdate(req.params.id, req.body.camp, {new: true}, function(err, updatedCampground){
         if(err){
             console.log(err.message);
+            req.flash('error', err.message);
+            return res.redirect('/campgrounds/' + req.params.id);
         } else {
             console.log(req.body.camp.name + ' updated');
-            res.redirect('/campgrounds/' + req.params.id);
+            req.flash('info', 'Campground Updated Succesfully!!');
+            return res.redirect('/campgrounds/' + req.params.id);
         }
     });
 });
 
-// Delete
+// Delete 
 router.delete('/:id', isLoggedIn, isAuthorized('Campground'), (req, res) => {
     Campground.findByIdAndDelete(req.params.id, function(err, deletedCamp){
         if(err){
             console.log(err.message);
-            res.redirect('/campgrounds/' + req.params.id);
+            req.flash('error', err.message);
+            return res.redirect('/campgrounds/' + req.params.id);
         } else {
             console.log(deletedCamp.name + ' deleted');
-            res.redirect('/');
+            req.flash('info', 'Campground deleted successfully!!');
+            return res.redirect('/campgrounds');
         }
     });
 });

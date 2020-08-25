@@ -3,7 +3,7 @@ var router    = require('express').Router(),
     User      = require('../models/User');
 
 router.get('/', (req, res) => {
-    res.redirect('/campgrounds');
+    res.render('index');
 });
 
 router.get('/register', (req, res) => {
@@ -15,12 +15,12 @@ router.post('/register', (req, res) => {
     User.register(newUser, req.body.password, function(err, user){
         if (err) {
             console.log(err.message);
+            req.flash('error', err.message);
             return res.redirect('/register');
-        } else {
-            passport.authenticate('local')(req, res, function(){
-                res.redirect('/');
-            });
-        }
+        } 
+        passport.authenticate('local')(req, res, function(){
+            res.redirect('/campgrounds');
+        });
     });
 });
 
@@ -28,15 +28,15 @@ router.get('/login', (req, res) => {
     res.render('loginForm');
 });
 
-router.post('/login', passport.authenticate('local', {
-    failureRedirect: '/login'
-}), (req, res) => {
-    res.redirect('/');
+router.post('/login', passport.authenticate('local', {failureRedirect: '/login', failureFlash: true}), (req, res) => {
+    req.flash('success', 'You are logged in');
+    return res.redirect('/campgrounds');
 });
 
 router.post('/logout', (req, res) => {
     req.logout();
-    res.redirect('/');
+    req.flash('success', 'You logged out successfully!! See you soon');
+    return res.redirect('/campgrounds');
 });
 
 module.exports = router;
