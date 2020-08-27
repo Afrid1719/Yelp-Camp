@@ -54,6 +54,6 @@ app.use('/campgrounds', require('./routes/campgrounds'));
 app.use('/campgrounds/:id/comments', require('./routes/comments'));
 
 // Server Config
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
     console.log('App Server started...');
 });
