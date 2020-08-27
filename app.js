@@ -18,11 +18,7 @@ var express          = require('express'),
 var app = express();
 
 // Database Config
-if(process.env.NODE_ENV == 'development'){
-    mongoose.connect(process.env.DB_HOST_DEV, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
-} else if(process.env.NODE_ENV == 'production') {
-    mongoose.connect(process.env.DB_HOST_PROD, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
-}
+mongoose.connect(process.env.DB_URL, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
 
 // Middleware
 app.set('views', __dirname + '/views');
