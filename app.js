@@ -15,7 +15,7 @@ var express          = require('express'),
 var app = express();
 
 // Database Config
-mongoose.connect('mongodb://localhost:27017/yelpcamp',{useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
+mongoose.connect('mongodb+srv://afrid1719:helloafrid17@cluster0.zkxaq.mongodb.net/yelpcamp?retryWrites=true&w=majority',{useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
 
 // Middleware
 app.set('views', __dirname + '/views');
