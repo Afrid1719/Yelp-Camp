@@ -1,7 +1,8 @@
 <%- include('../layouts/navbar') %>
 
-<link rel="stylesheet" href="/css/campForm.css">
-<div class="container form-container mt-5 p-5 w-50">
+<link rel="stylesheet" href="/css/form.css">
+<div class="container form-container mt-3 p-5">
+    <h1 class="text-center form-heading">Edit Campground - <span class="text-capitalize"><%= campground.name %></span></h1>
     <form action="<%= `/campgrounds/${campground._id}?_method=PUT` %>" method="post">
         <div class="form-group">
             <label for="name">Campground Name</label>
@@ -20,12 +21,12 @@
 
         <div class="form-group">
             <label for="description">Description</label>
-            <textarea class="form-control" id="description" name="camp[description]" rows="3" required><%= campground.description %></textarea>
+            <textarea class="form-control" id="description" name="camp[description]" rows="3"><%= campground.description %></textarea>
         </div>
 
         <button type="submit" class="btn btn-success">Update</button>
 
-    <a class="text-success d-block mt-2" href="<%= `/campgrounds/${campground._id}` %>">Go Back</a>
+        <a class="text-center text-success back-link" href="<%= `/campgrounds/${campground._id}` %>">Go Back</a>
     </form>
 </div>
 

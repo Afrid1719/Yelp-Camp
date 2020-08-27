@@ -1,8 +1,9 @@
 <%- include('../layouts/navbar') %>
 
-<link rel="stylesheet" href="/css/campForm.css">
+<link rel="stylesheet" href="/css/form.css">
 
-<div class="container form-container mt-5 p-5 w-50">
+<div class="container mt-3 p-5">
+    <h1 class="form-heading">Add New Campground</h1>
     <form action="/campgrounds" method="post">
         <div class="form-group">
             <label for="name">Campground Name</label>
@@ -21,12 +22,12 @@
 
         <div class="form-group">
             <label for="description">Description</label>
-            <textarea class="form-control" id="description" name="camp[description]" rows="3" required></textarea>
+            <textarea class="form-control" id="description" name="camp[description]" rows="3"></textarea>
         </div>
 
         <button type="submit" class="btn btn-success">Add</button>
-        <br>
-        <a class="text-success d-inline-block mt-2" href="/campgrounds">Go Back</a>
+
+        <a class="text-center text-success back-link" href="/campgrounds">Go Back</a>
     </form>
 </div>
 

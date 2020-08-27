@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/register', (req, res) => {
-    res.render('registrationForm.ejs');
+    res.render('registration');
 });
 
 router.post('/register', (req, res) => {
@@ -25,7 +25,7 @@ router.post('/register', (req, res) => {
 });
 
 router.get('/login', (req, res) => {
-    res.render('loginForm');
+    res.render('login');
 });
 
 router.post('/login', passport.authenticate('local', {failureRedirect: '/login', failureFlash: true}), (req, res) => {

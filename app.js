@@ -1,3 +1,4 @@
+require('dotenv').config();
 var express          = require('express'),
     bodyParser       = require('body-parser'),
     mongoose         = require('mongoose'),
@@ -17,7 +18,11 @@ var express          = require('express'),
 var app = express();
 
 // Database Config
-mongoose.connect('mongodb+srv://afrid1719:helloafrid17@cluster0.zkxaq.mongodb.net/yelpcamp?retryWrites=true&w=majority',{useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
+if(process.env.NODE_ENV == 'development'){
+    mongoose.connect(process.env.DB_HOST_DEV, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
+} else if(process.env.NODE_ENV == 'production') {
+    mongoose.connect(process.env.DB_HOST_PROD, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
+}
 
 // Middleware
 app.set('views', __dirname + '/views');
@@ -54,6 +59,6 @@ app.use('/campgrounds', require('./routes/campgrounds'));
 app.use('/campgrounds/:id/comments', require('./routes/comments'));
 
 // Server Config
-app.listen(process.env.PORT || 3000, () => {
+app.listen(process.env.PORT, () => {
     console.log('App Server started...');
 });

@@ -29,7 +29,7 @@
                 </li>
                  <li class="nav-item">
                     <form action="/logout" class="form-inline" method="post">
-                        <button class="btn btn-success" type="submit">Logout</button>
+                        <button class="btn btn-success logout" type="submit">Logout</button>
                     </form>
                  </li>
             <% } else { %>
@@ -44,7 +44,7 @@
     </div>
 </nav>
 
-<div class="container my-3">
+<div class="container my-3 px-0">
     <% if(success && success.length > 0){ %>
         <div class="alert alert-dismissable alert-success" role="alert">
             <%= success %>
