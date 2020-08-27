@@ -1,6 +1,8 @@
 var express          = require('express'),
     bodyParser       = require('body-parser'),
     mongoose         = require('mongoose'),
+    session          = require('express-session'),
+    MongoStore       = require('connect-mongo')(session),
     sanitizer        = require('express-sanitizer'),
     methodOverride   = require('method-override'),
     passport         = require('passport'),
@@ -25,9 +27,10 @@ app.use(sanitizer());
 app.use(methodOverride('_method'));
 app.use(express.static(__dirname + '/necessities'));
 app.use(express.static(__dirname + '/public'));
-app.use(require('express-session')({
+app.use(session({
     secret: "The Dark Lord must return",
-    resave: false,
+    store: new MongoStore({mongooseConnection: mongoose.connection}),
+    resave: true,
     saveUninitialized: false
 }));
 app.use(flash());
