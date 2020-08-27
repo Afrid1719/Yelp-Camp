@@ -1,0 +1,49 @@
+.gallery {
+    column-gap: 0;
+    column-count: none;
+    column-width: none;
+}
+
+@media screen and (min-width: 500px) {
+    .gallery {
+        column-count: 2;
+        column-width: 50%;
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .gallery {
+        column-count: 3;
+        column-width: 33%;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .gallery {
+        column-count: 5;
+        column-width: 20%;
+    }
+}
+
+.camp-name {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    transition: 0.75s ease;
+    background-color: rgba(233, 236, 239, 0.55);
+}
+
+.camp-name > a {
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    color: #1c2331;
+}
+
+.img-container:hover .camp-name{
+    cursor: pointer;
+    height: 100%;
+}

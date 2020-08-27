@@ -1,0 +1,25 @@
+.card-body{
+    padding: 0.6rem;
+}
+
+.author{
+    font-size: 18px;
+}
+
+.authorized{
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+#comment_body:disabled{
+    background: transparent;
+    border: none;
+    color: #000;
+    padding: 0;
+    height: auto;
+    margin-bottom: 4px;
+}
+
+#comment_body:not(:disabled){
+    margin-bottom: 6px;
+}
