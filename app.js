@@ -52,11 +52,11 @@ app.use("/campgrounds", require("./routes/campgrounds"));
 app.use("/campgrounds/:id/comments", require("./routes/comments"));
 
 async function startServer() {
-  try {
-    await connectToDB();
-  } catch (e) {
-    console.error(e);
-  }
+  //   try {
+  //     await connectToDB();
+  //   } catch (e) {
+  //     console.error(e);
+  //   }
   app.listen(process.env.PORT, () => {
     console.log("App Server started...");
   });
